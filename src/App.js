@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
+import {connect} from 'react-redux'
+import {Route,Switch, withRouter} from 'react-router-dom'
+import LogIn from './components/LogIn'
+import SignUp from './components/SignUp'
 
 class App extends Component {
 
@@ -38,12 +42,13 @@ class App extends Component {
 
     return (
       <div >
-        <ul>
-        {list}
-        </ul>  
+        <Switch>
+          <Route path="/login" component={LogIn}></Route>
+          <Route path="/signup" component={SignUp}></Route>
+          {/* <Route exact path="/"/>  */}
+        </Switch> 
       </div>
     );
   }
 }
-
-export default App;
+export default withRouter(App);
