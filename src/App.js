@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Route,Switch, withRouter} from 'react-router-dom'
 import LogIn from './components/LogIn'
 import SignUp from './components/SignUp'
+import UserContainer from './containers/UserContainer'
 
 class App extends Component {
 
@@ -38,14 +39,14 @@ class App extends Component {
 
   
   render() {
-    let list = this.state.watchlists.map( stock => <li key = {stock.id}>{stock.ticker} </li>)
+    // let list = this.state.watchlists.map( stock => <li key = {stock.id}>{stock.ticker} </li>)
 
     return (
       <div >
         <Switch>
           <Route path="/login" component={LogIn}></Route>
           <Route path="/signup" component={SignUp}></Route>
-          {/* <Route exact path="/"/>  */}
+          <Route exact path="/" component ={UserContainer}/> 
         </Switch> 
       </div>
     );
