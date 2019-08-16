@@ -7,7 +7,7 @@ class HoldingStock extends Component {
             <div>
                 {this.props.stock.ticker}
                 {this.props.stock.quantity}
-                {this.props.stock.value}
+                {this.props.stock.price}
             </div>
           );
     }

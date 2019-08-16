@@ -18,7 +18,7 @@ const rootReducer = (state = initialState, action) => {
 
         case('GET_HOLDING'): {
             let newState = {...state}
-            let holding = action.payload.map(stock => {return {id: stock.id, ticker: stock.ticker, quantity: stock.quantity, value: 0}})
+            let holding = action.payload.map(stock => {return {id: stock.id, ticker: stock.ticker, quantity: stock.quantity, price: 0}})
             newState.holding = holding
             return newState
         }

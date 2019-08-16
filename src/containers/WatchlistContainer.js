@@ -11,13 +11,13 @@ class WatchlistContainer extends Component {
 
     render() { 
 
-        
+
         const list = this.props.watchlist.map(
             stock => <WatchlistStock key={stock.id} stock={stock}/>
         )
         return (
             <div className="watchlist-table">
-               {list} h
+               {list} 
             </div>
           );
     }
