@@ -56,6 +56,19 @@ const rootReducer = (state = initialState, action) => {
 
             return newState
           }
+
+          case('UPDATE_HOLDING'): {
+            let stock = state.holding.find(stock => stock.ticker === action.payload.symbol)
+            let idx = state.holding.indexOf(stock)
+            let newStock = {...state.holding[idx], price: action.payload.latestPrice, change: action.payload.changePercent}
+            let newHolding = [...state.holding]
+            newHolding[idx] = newStock
+            let newState = {...state, holding: newHolding}
+
+            return newState
+          }
+
+          
         
 
         
