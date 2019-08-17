@@ -3,10 +3,12 @@ import {stockStore} from './stockStore.js'
 const initialState = {
     user: null,
     watchlist: [],
+    transactions: [],
     holding: [],
     stocks: stockStore,
     selectedStock: null,
-    displayTickerError: false
+    displayTickerError: false,
+    
 }
 
 
@@ -18,6 +20,12 @@ const rootReducer = (state = initialState, action) => {
             let newState = {...state}
             let watchlist = action.payload.map(stock => {return {id: stock.id, ticker: stock.ticker, change: 0}})
             newState.watchlist = watchlist
+            return newState
+        }
+        case('GET_TRANSACTIONS'): {
+            let newState = {...state}
+            let transactions = action.payload
+            newState.transactions = transactions
             return newState
         }
 
@@ -67,13 +75,6 @@ const rootReducer = (state = initialState, action) => {
 
             return newState
           }
-
-          
-        
-
-        
-
-        
 
         default:
             return state

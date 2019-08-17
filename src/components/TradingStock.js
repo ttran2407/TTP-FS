@@ -24,6 +24,7 @@ class TradingStock extends Component {
 
     
     render() { 
+        let stock = this.props.holding.find(stock => stock.ticker === this.props.selectedStock.symbol)
 
         return (
             <div>
@@ -37,7 +38,8 @@ class TradingStock extends Component {
                     <span>Sell</span>
                 </label>
 
-                
+                <label>Currently holding</label> 
+                <div>{stock.quantity}</div>               
 
                 <label >Quantity</label>
                 <input type="text" className="transaction-quantity" value={this.state.quantity} onChange={this.handleChangeQuantity}/>

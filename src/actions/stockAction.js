@@ -1,6 +1,7 @@
 /* ---------- ACTION CREATORS ------------- */
 const getWatchlist = (watchlist) => ({type: "GET_WATCH_LIST", payload: watchlist})
 const getHolding = (holding) => ({type: "GET_HOLDING", payload: holding})
+const getTransactions = (transactions) => ({type: "GET_TRANSACTIONS", payload: transactions})
 const getSingleStock = (stock) => ({type: "GET_SINGLE_STOCK", payload: stock})
 const triggleTickerError = () => ({type: "TRIGGLE_TICKER_ERROR"})
 const cancelTickerError = () => ({type: "CANCEL_TICKER_ERROR"})
@@ -12,6 +13,26 @@ const updateHolding = (stock) => ({type: "UPDATE_HOLDING", payload: stock})
 /* ---------- THUNK CREATORS ------------- */
 
 const apiKey = process.env.REACT_APP_API_KEY
+
+
+const fetchTransactions = (user_id) => {
+  // let token = localStorage.getItem("token")
+  return dispatch => {
+    return fetch(`http://localhost:3000/users/${user_id}/transactions`,{
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Action": "application/json",
+      //   "Authorization": `${token}`
+      }
+    })
+    .then(res => res.json())
+    .then(transactions => {
+       dispatch(getTransactions(transactions))
+          // watchlist.forEach(stock => updateWatchlistChange(stock.stock_symbol, dispatch))
+        })
+  }
+}
 
 const fetchWatchlist = (user_id) => {
     // let token = localStorage.getItem("token")
@@ -110,4 +131,4 @@ const fetchWatchlist = (user_id) => {
   
   export {fetchWatchlist, fetchHolding, fetchSingleStock,
      triggleTickerError, updateWatchlistStock,
-     updateHoldingStock}
+     updateHoldingStock, fetchTransactions}
