@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 // import {connect} from 'react-redux'
+import './Custom.sass'
 import {Route,Switch, withRouter} from 'react-router-dom'
 import LogIn from './components/LogIn'
 import SignUp from './components/SignUp'

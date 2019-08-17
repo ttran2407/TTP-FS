@@ -1,0 +1,47 @@
+.toggler
+  padding: 3px
+  position: relative
+
+@keyframes moveCircle1
+  50%
+    padding: 0 12%
+
+
+@keyframes moveCircle2
+  50%
+    padding: 0 12%
+
+
+.toggler__label
+  user-select: none
+  display: flex
+  align-items: center
+  cursor: pointer
+  span
+    margin-right: 1em
+  input:checked ~ .toggler::before
+    transform: translateX(-100%)
+    left: 100%
+    animation: moveCircle2 0.2s ease 1
+
+.toggler
+  &::before
+    content: ""
+    display: block
+    background: white
+    position: relative
+    left: 0
+    animation: moveCircle1 0.2s ease 1
+  background: green
+  border-radius: 66px
+  width: 82.5px
+  transition: 0.2s cubic-bezier(0.7, 0.15, 0.36, 1)
+
+.toggler__label input:checked ~ .toggler
+  background: red
+
+.toggler::before
+  border-radius: 33px
+  width: 33px
+  height: 33px
+  transition: 0.2s cubic-bezier(0.7, 0.15, 0.36, 1)

@@ -10,7 +10,6 @@ class StockForm extends Component {
         ticker: "",
         price: 0,
         quantity: 0,
-        displayOption: false,
 
     }
 
@@ -38,14 +37,14 @@ class StockForm extends Component {
                     
                     <label >Ticker</label>
                     <input type="text" className="ticker" value={this.state.ticker} onChange={this.handleChange}/>
-                    {this.props.selectedStock ?  ( this.props.selectedStock.latestPrice) : null } 
+                    {(this.props.selectedStock && !this.props.displayTickerError) ?  ( this.props.selectedStock.latestPrice) : null } 
                     <button type="submit" name="tickerFinder" >Check Price</button>
 
                 </form>
 
                 {this.props.displayTickerError ? <div> Invalid ticker, please re-enter </div> : null}
 
-            { this.state.displayOption ? <TradingStock /> : null}
+            { (this.props.selectedStock && !this.props.displayTickerError)? <TradingStock /> : null}
 
             </div>
             

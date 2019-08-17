@@ -65,7 +65,7 @@ const fetchWatchlist = (user_id) => {
       .then(stock => {
         if (stock){
           dispatch(getSingleStock(stock))
-        dispatch(cancelTickerError())
+          dispatch(cancelTickerError())
         }        
       })
       .catch(error => console.log(error)) 
