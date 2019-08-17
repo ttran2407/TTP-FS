@@ -1,7 +1,12 @@
+import {stockStore} from './stockStore.js'
+
 const initialState = {
     user: null,
     watchlist: [],
-    holding: []
+    holding: [],
+    stocks: stockStore,
+    selectedStock: null,
+    displayTickerError: false
 }
 
 
@@ -22,6 +27,27 @@ const rootReducer = (state = initialState, action) => {
             newState.holding = holding
             return newState
         }
+        case('GET_SINGLE_STOCK'): {
+            let newState = {...state}
+            newState.selectedStock = action.payload
+            return newState
+        }
+
+        case('TRIGGLE_TICKER_ERROR'): {
+            let newState = {...state}
+            newState.displayTickerError = true
+            return newState
+        }
+
+        case('CANCEL_TICKER_ERROR'): {
+            let newState = {...state}
+            newState.displayTickerError = false
+            return newState
+        }
+
+        
+
+        
 
         default:
             return state

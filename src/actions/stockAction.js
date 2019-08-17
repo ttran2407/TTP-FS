@@ -1,9 +1,13 @@
 /* ---------- ACTION CREATORS ------------- */
 const getWatchlist = (watchlist) => ({type: "GET_WATCH_LIST", payload: watchlist})
 const getHolding = (holding) => ({type: "GET_HOLDING", payload: holding})
+const getSingleStock = (stock) => ({type: "GET_SINGLE_STOCK", payload: stock})
+const triggleTickerError = () => ({type: "TRIGGLE_TICKER_ERROR"})
+const cancelTickerError = () => ({type: "CANCEL_TICKER_ERROR"})
 
 /* ---------- THUNK CREATORS ------------- */
 
+const apiKey = process.env.REACT_APP_API_KEY
 
 const fetchWatchlist = (user_id) => {
     // let token = localStorage.getItem("token")
@@ -42,4 +46,26 @@ const fetchWatchlist = (user_id) => {
           })
     }
   }
-  export {fetchWatchlist, fetchHolding}
+
+
+  const fetchSingleStock = (ticker) => {
+    return dispatch => { 
+      return fetch(`https://cloud.iexapis.com/stable/stock/${ticker}/quote/?token=${apiKey}`)
+      .then(res => {
+        if (res.ok){
+          return res.json()
+        } else {
+          dispatch(triggleTickerError())
+        }
+      })
+      .then(stock => {
+        if (stock){
+          dispatch(getSingleStock(stock))
+        dispatch(cancelTickerError())
+        }        
+      })
+      .catch(error => console.log(error)) 
+    }
+  }
+  
+  export {fetchWatchlist, fetchHolding, fetchSingleStock, triggleTickerError}

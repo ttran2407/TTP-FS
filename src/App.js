@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import './App.css';
-import {connect} from 'react-redux'
+// import {connect} from 'react-redux'
 import {Route,Switch, withRouter} from 'react-router-dom'
 import LogIn from './components/LogIn'
 import SignUp from './components/SignUp'
 import UserContainer from './containers/UserContainer'
+
 
 class App extends Component {
 

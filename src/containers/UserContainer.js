@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import WatchlistContainer from "./WatchlistContainer"
 import HoldingContainer from "./HoldingContainer"
+import StockForm from '../components/StockForm'
 
 
 class UserContainer extends Component {
@@ -14,6 +15,10 @@ class UserContainer extends Component {
 
                 <div>
                     <HoldingContainer/> 
+                </div>
+
+                <div>
+                <StockForm/> 
                 </div>
                 
                 
