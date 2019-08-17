@@ -45,6 +45,19 @@ const rootReducer = (state = initialState, action) => {
             return newState
         }
 
+
+        case('UPDATE_WATCHLIST'): {
+            let stock = state.watchlist.find(stock => stock.ticker === action.payload.symbol)
+            let idx = state.watchlist.indexOf(stock)
+            let newStock = {...state.watchlist[idx], change: action.payload.changePercent}
+            let newWatchlist = [...state.watchlist]
+            newWatchlist[idx] = newStock
+            let newState = {...state, watchlist: newWatchlist}
+
+            return newState
+          }
+        
+
         
 
         
