@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {createBuyTransaction} from '../actions/stockAction'
+import {createBuyTransaction, createSellTransaction} from '../actions/stockAction'
 
 class TradingStock extends Component {
 
@@ -20,17 +20,17 @@ class TradingStock extends Component {
         let type 
         e.target.checked ? type = "SELL" : type = "BUY"
         this.setState({
-            type: type
+            transaction_type: type
         })
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
-        if (this.state.type === "SELL"){ //sell stock
+        if (this.state.transaction_type === "SELL"){ //sell stock
             if (this.state.quantity > this.props.selectedStock.quantity){ //dont have enough stock
                 this.setState({notEnoughStock: true})
             } else {
-                return //create sell transaction
+                this.props.createSellTransaction(this.state, 1, this.props.selectedStock) //create sell transaction
             }
         } else { //buy stock
             // if (this.state.quantity * this.props.selectedStock.latestPrice > user_money){ //dont have enough money
@@ -79,5 +79,5 @@ const mapStateToProps = state => {
 }
  
 
-export default connect (mapStateToProps, {createBuyTransaction})(TradingStock);
+export default connect (mapStateToProps, {createBuyTransaction, createSellTransaction})(TradingStock);
 

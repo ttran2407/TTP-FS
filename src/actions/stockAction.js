@@ -149,9 +149,9 @@ const fetchWatchlist = (user_id) => {
         })
       })
       .then(res => res.json())
-      .then(transaction => {
-        createHoldingStock(transaction, dispatch)
-        dispatch(addTransaction(transaction))
+      .then(array => {
+        createHoldingStock(array[0], dispatch)
+        dispatch(addTransaction(array[0]))
       })
     }
   }
@@ -181,7 +181,64 @@ const fetchWatchlist = (user_id) => {
   
       })
   }
+
+  const createSellTransaction = (transaction, user_id, stock) => {
+    // let token = localStorage.getItem("token")
+    return dispatch => {
+      return fetch(`http://localhost:3000/users/${user_id}/transactions`,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Action": "application/json",
+          // "Authorization": `${token}`
+        },
+        body: JSON.stringify({
+          user_id: parseInt(user_id),
+          quantity: parseInt(transaction.quantity),
+          stock_price: parseFloat(stock.latestPrice),
+          ticker: stock.symbol,
+          transaction_type: transaction.transaction_type
+        })
+      })
+      .then(res => res.json())
+      .then(array => {
+
+        destroyHoldingStock(array[0], dispatch, array[1])
+        dispatch(addTransaction(array[0]))
+      })
+      
+    }
+  }
+
+  const destroyHoldingStock = (transaction, dispatch, holdingstock) => {
+    // let token = localStorage.getItem("token")
+      fetch(`http://localhost:3000/users/${transaction.user_id}/holdings/${holdingstock.id}`,{
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Action": "application/json",
+          // "Authorization": `${token}`
+        },
+        body: JSON.stringify({
+          user_id: transaction.user_id,
+          stock_id: transaction.stock_id,
+          quantity: transaction.quantity,
+          ticker: transaction.ticker,
+          stock_price: transaction.stock_price,
+          id: holdingstock.id
+        })
+      })
+      .then(res => res.json())
+      .then(object => {
+        dispatch(getUser(object.user))
+        dispatch(getHolding(object.holdings))
+      })
+  }
+
+  
   
   export {fetchWatchlist, fetchHolding, fetchSingleStock,
      triggleTickerError, updateWatchlistStock,
-     updateHoldingStock, fetchTransactions, createBuyTransaction}
+     updateHoldingStock, fetchTransactions, createBuyTransaction,
+     createSellTransaction}
+
