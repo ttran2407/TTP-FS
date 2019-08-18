@@ -10,9 +10,14 @@ class TransactionContainer extends Component {
     }
     
     render() { 
+    
+        const list = this.props.transactions.map(
+            transaction => <Transaction key = {transaction.id} transaction={transaction}/>
+        )
+        
         return ( 
             <div>
-                This is transaction
+                {list}
             </div>
          );
     }
@@ -20,7 +25,7 @@ class TransactionContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        watchlist: state.watchlist
+        transactions: state.transactions
     }
 }
  
