@@ -5,7 +5,6 @@ const initialState = {
     watchlist: [],
     transactions: [],
     holding: [],
-    stocks: stockStore,
     selectedStock: null,
     displayTickerError: false,
     

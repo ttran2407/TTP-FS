@@ -16,15 +16,17 @@ const addTransaction = (transaction) => ({type: "ADD_TRANSACTION", payload: tran
 const apiKey = process.env.REACT_APP_API_KEY
 
 
+
+
 const fetchTransactions = (user_id) => {
-  // let token = localStorage.getItem("token")
+  let token = localStorage.getItem("token")
   return dispatch => {
     return fetch(`http://localhost:3000/users/${user_id}/transactions`,{
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         "Action": "application/json",
-      //   "Authorization": `${token}`
+        "Authorization": `${token}`
       }
     })
     .then(res => res.json())
@@ -36,14 +38,14 @@ const fetchTransactions = (user_id) => {
 }
 
 const fetchWatchlist = (user_id) => {
-    // let token = localStorage.getItem("token")
+    let token = localStorage.getItem("token")
     return dispatch => {
       return fetch(`http://localhost:3000/users/${user_id}/watchlists`,{
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           "Action": "application/json",
-        //   "Authorization": `${token}`
+          "Authorization": `${token}`
         }
       })
       .then(res => res.json())
@@ -55,14 +57,14 @@ const fetchWatchlist = (user_id) => {
   }
 
   const fetchHolding = (user_id) => {
-    // let token = localStorage.getItem("token")
+    let token = localStorage.getItem("token")
     return dispatch => {
       return fetch(`http://localhost:3000/users/${user_id}/holdings`,{
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           "Action": "application/json",
-        //   "Authorization": `${token}`
+          "Authorization": `${token}`
         }
       })
       .then(res => res.json())
@@ -131,14 +133,14 @@ const fetchWatchlist = (user_id) => {
   }
 
   const createBuyTransaction = (transaction, user_id, stock) => {
-    // let token = localStorage.getItem("token")
+    let token = localStorage.getItem("token")
     return dispatch => {
       return fetch(`http://localhost:3000/users/${user_id}/transactions`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Action": "application/json",
-          // "Authorization": `${token}`
+          "Authorization": `${token}`
         },
         body: JSON.stringify({
           user_id: parseInt(user_id),
@@ -157,14 +159,14 @@ const fetchWatchlist = (user_id) => {
   }
 
   const createHoldingStock = (transaction, dispatch) => {
-    // let token = localStorage.getItem("token")
+    let token = localStorage.getItem("token")
 
       fetch(`http://localhost:3000/users/${transaction.user_id}/holdings`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Action": "application/json",
-          // "Authorization": `${token}`
+          "Authorization": `${token}`
         },
         body: JSON.stringify({
           user_id: transaction.user_id,
@@ -183,14 +185,14 @@ const fetchWatchlist = (user_id) => {
   }
 
   const createSellTransaction = (transaction, user_id, stock) => {
-    // let token = localStorage.getItem("token")
+    let token = localStorage.getItem("token")
     return dispatch => {
       return fetch(`http://localhost:3000/users/${user_id}/transactions`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Action": "application/json",
-          // "Authorization": `${token}`
+          "Authorization": `${token}`
         },
         body: JSON.stringify({
           user_id: parseInt(user_id),
@@ -211,13 +213,13 @@ const fetchWatchlist = (user_id) => {
   }
 
   const destroyHoldingStock = (transaction, dispatch, holdingstock) => {
-    // let token = localStorage.getItem("token")
+    let token = localStorage.getItem("token")
       fetch(`http://localhost:3000/users/${transaction.user_id}/holdings/${holdingstock.id}`,{
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           "Action": "application/json",
-          // "Authorization": `${token}`
+          "Authorization": `${token}`
         },
         body: JSON.stringify({
           user_id: transaction.user_id,
@@ -240,5 +242,5 @@ const fetchWatchlist = (user_id) => {
   export {fetchWatchlist, fetchHolding, fetchSingleStock,
      triggleTickerError, updateWatchlistStock,
      updateHoldingStock, fetchTransactions, createBuyTransaction,
-     createSellTransaction}
+     createSellTransaction, getUser}
 
