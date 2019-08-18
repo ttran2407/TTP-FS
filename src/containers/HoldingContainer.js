@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 class HoldingContainer extends Component {
 
     componentDidMount = () => {
-        this.props.fetchHolding(1)
+        this.props.fetchHolding(this.props.user.id)
     }
     
     render() { 
@@ -25,7 +25,8 @@ class HoldingContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        holding: state.holding
+        holding: state.holding,
+        user: state.user
     }
 }
  

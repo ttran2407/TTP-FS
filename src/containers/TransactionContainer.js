@@ -6,7 +6,7 @@ import Transaction from '../components/Transaction'
 class TransactionContainer extends Component {
 
     componentDidMount = () => {
-        this.props.fetchTransactions(1)
+        this.props.fetchTransactions(this.props.user.id)
     }
     
     render() { 
@@ -25,7 +25,8 @@ class TransactionContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        transactions: state.transactions
+        transactions: state.transactions,
+        user: state.user
     }
 }
  

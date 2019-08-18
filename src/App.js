@@ -24,7 +24,7 @@ class App extends Component {
     .then(object => {
        if (!object.message){
         this.props.getUser(object.user)
-       }
+       } 
     })
   }
  
@@ -32,7 +32,7 @@ class App extends Component {
     
     return (
       <div >
-        {this.props.user ? <UserContainer /> : <AuthContainer/>}
+        {this.props.user ? <UserContainer user ={this.props.user} /> : <AuthContainer/>}
       </div>
     );
   }

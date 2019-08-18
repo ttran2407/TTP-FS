@@ -6,7 +6,7 @@ import WatchlistStock from '../components/WatchlistStock'
 class WatchlistContainer extends Component {
 
     componentDidMount = () => {
-        this.props.fetchWatchlist(1)
+        this.props.fetchWatchlist(this.props.user.id)
     }
 
     render() { 
@@ -25,7 +25,8 @@ class WatchlistContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        watchlist: state.watchlist
+        watchlist: state.watchlist,
+        user: state.user
     }
 }
  
