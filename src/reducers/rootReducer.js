@@ -16,6 +16,11 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
     switch(action.type){
+        case('GET_USER'): {
+            let newState = {...state}
+            newState.user = action.payload
+            return newState
+        }
         case('GET_WATCH_LIST'): {
             let newState = {...state}
             let watchlist = action.payload.map(stock => {return {id: stock.id, ticker: stock.ticker, change: 0}})
@@ -72,6 +77,14 @@ const rootReducer = (state = initialState, action) => {
             let newHolding = [...state.holding]
             newHolding[idx] = newStock
             let newState = {...state, holding: newHolding}
+
+            return newState
+          }
+
+          case('ADD_TRANSACTION'): {
+            let newTransactions = [...state.transactions]
+            newTransactions.unshift(action.payload)
+            let newState = {...state, transactions: newTransactions}
 
             return newState
           }

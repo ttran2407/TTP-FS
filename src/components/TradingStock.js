@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import {createBuyTransaction} from '../actions/stockAction'
 
 class TradingStock extends Component {
 
     state = {
         quantity: 0,
-        type: false
+        transaction_type: "BUY",
+        notEnoughStock: false,
     }
 
     handleChangeQuantity  = (e) => {
@@ -15,11 +17,28 @@ class TradingStock extends Component {
     }
 
     handleChangeType  = (e) => {
-        
+        let type 
+        e.target.checked ? type = "SELL" : type = "BUY"
         this.setState({
-            type: e.target.checked
+            type: type
         })
-        
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        if (this.state.type === "SELL"){ //sell stock
+            if (this.state.quantity > this.props.selectedStock.quantity){ //dont have enough stock
+                this.setState({notEnoughStock: true})
+            } else {
+                return //create sell transaction
+            }
+        } else { //buy stock
+            // if (this.state.quantity * this.props.selectedStock.latestPrice > user_money){ //dont have enough money
+            //     this.setState({notEnoughMoney: true})
+            // } else {
+                this.props.createBuyTransaction(this.state, 1, this.props.selectedStock) //create buy transaction
+            // }
+        }
     }
 
     
@@ -29,7 +48,7 @@ class TradingStock extends Component {
         return (
             <div>
                 Let get a trade
-                <form>
+                <form onSubmit = {this.handleSubmit}>
 
                 <label className='toggler__label'>
                     <input type="checkbox" hidden onChange={this.handleChangeType}/>
@@ -39,7 +58,7 @@ class TradingStock extends Component {
                 </label>
 
                 <label>Currently holding</label> 
-                <div>{stock.quantity}</div>               
+                <div>{stock ? stock.quantity : 0}</div>               
 
                 <label >Quantity</label>
                 <input type="text" className="transaction-quantity" value={this.state.quantity} onChange={this.handleChangeQuantity}/>
@@ -60,9 +79,5 @@ const mapStateToProps = state => {
 }
  
 
-export default connect (mapStateToProps, null)(TradingStock);
+export default connect (mapStateToProps, {createBuyTransaction})(TradingStock);
 
-
-//buy or sell stock
-
-//form - quantity, button

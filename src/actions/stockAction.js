@@ -1,4 +1,5 @@
 /* ---------- ACTION CREATORS ------------- */
+const getUser = (user) => ({type: "GET_USER", payload: user})
 const getWatchlist = (watchlist) => ({type: "GET_WATCH_LIST", payload: watchlist})
 const getHolding = (holding) => ({type: "GET_HOLDING", payload: holding})
 const getTransactions = (transactions) => ({type: "GET_TRANSACTIONS", payload: transactions})
@@ -7,7 +8,7 @@ const triggleTickerError = () => ({type: "TRIGGLE_TICKER_ERROR"})
 const cancelTickerError = () => ({type: "CANCEL_TICKER_ERROR"})
 const updateWatchlist = (stock) => ({type: "UPDATE_WATCHLIST", payload: stock})
 const updateHolding = (stock) => ({type: "UPDATE_HOLDING", payload: stock})
-
+const addTransaction = (transaction) => ({type: "ADD_TRANSACTION", payload: transaction})
 
 
 /* ---------- THUNK CREATORS ------------- */
@@ -128,7 +129,59 @@ const fetchWatchlist = (user_id) => {
       .catch(error => console.log(error)) 
     }
   }
+
+  const createBuyTransaction = (transaction, user_id, stock) => {
+    // let token = localStorage.getItem("token")
+    return dispatch => {
+      return fetch(`http://localhost:3000/users/${user_id}/transactions`,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Action": "application/json",
+          // "Authorization": `${token}`
+        },
+        body: JSON.stringify({
+          user_id: parseInt(user_id),
+          quantity: parseInt(transaction.quantity),
+          stock_price: parseFloat(stock.latestPrice),
+          ticker: stock.symbol,
+          transaction_type: transaction.transaction_type
+        })
+      })
+      .then(res => res.json())
+      .then(transaction => {
+        createHoldingStock(transaction, dispatch)
+        dispatch(addTransaction(transaction))
+      })
+    }
+  }
+
+  const createHoldingStock = (transaction, dispatch) => {
+    // let token = localStorage.getItem("token")
+
+      fetch(`http://localhost:3000/users/${transaction.user_id}/holdings`,{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Action": "application/json",
+          // "Authorization": `${token}`
+        },
+        body: JSON.stringify({
+          user_id: transaction.user_id,
+          stock_id: transaction.stock_id,
+          quantity: transaction.quantity,
+          ticker: transaction.ticker,
+          stock_price: transaction.stock_price
+        })
+      })
+      .then(res => res.json())
+      .then(object => {
+        dispatch(getUser(object.user))
+        dispatch(getHolding(object.holdings))
+  
+      })
+  }
   
   export {fetchWatchlist, fetchHolding, fetchSingleStock,
      triggleTickerError, updateWatchlistStock,
-     updateHoldingStock, fetchTransactions}
+     updateHoldingStock, fetchTransactions, createBuyTransaction}
