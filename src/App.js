@@ -8,6 +8,7 @@ import UserContainer from './containers/UserContainer'
 import {getUser} from './actions/stockAction'
 
 
+
 class App extends Component {
 
   componentDidMount = () => {
@@ -31,6 +32,7 @@ class App extends Component {
   render() {
     
     return (
+      
       <div >
         {this.props.user ? <UserContainer user ={this.props.user} /> : <AuthContainer/>}
       </div>
