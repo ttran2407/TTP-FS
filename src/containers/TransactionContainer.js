@@ -18,20 +18,24 @@ class TransactionContainer extends Component {
         )
         
         return ( 
-            <Table singleLine>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Date</Table.HeaderCell>
-                        <Table.HeaderCell>Ticker</Table.HeaderCell>
-                        <Table.HeaderCell>Type</Table.HeaderCell>
-                        <Table.HeaderCell>Price</Table.HeaderCell>
-                        <Table.HeaderCell>Quantity</Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                    {list}
-                </Table.Body>
-            </Table>
+            
+            <div style={{"height": "40vh", "overflow": "scroll", "width": "100%"}}>
+               <Table singleLine>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Date</Table.HeaderCell>
+                            <Table.HeaderCell>Ticker</Table.HeaderCell>
+                            <Table.HeaderCell>Type</Table.HeaderCell>
+                            <Table.HeaderCell>Price</Table.HeaderCell>
+                            <Table.HeaderCell>Quantity</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        {list}
+                    </Table.Body>
+                </Table>        
+            </div>
+            
          );
     }
 }

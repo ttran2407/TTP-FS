@@ -3,8 +3,10 @@ import WatchlistContainer from "./WatchlistContainer"
 import HoldingContainer from "./HoldingContainer"
 import TransactionContainer from "./TransactionContainer"
 import { Grid} from 'semantic-ui-react'
+import {connect} from 'react-redux'
 
 import StockForm from '../components/StockForm'
+import Top from '../components/Header'
 
 
 class UserContainer extends Component {
@@ -13,6 +15,8 @@ class UserContainer extends Component {
         return (
 
             <div>
+
+                <Top />
 
                 <Grid style={{"height": "250px"}} columns={3} padded='vertically'>
                     <Grid.Column>
@@ -34,5 +38,11 @@ class UserContainer extends Component {
           );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        user: state.user
+    }
+}
  
-export default UserContainer;
+export default connect(mapStateToProps, null)( UserContainer);

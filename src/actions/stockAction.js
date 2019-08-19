@@ -32,7 +32,7 @@ const fetchTransactions = (user_id) => {
     .then(res => res.json())
     .then(transactions => {
        dispatch(getTransactions(transactions))
-          // watchlist.forEach(stock => updateWatchlistChange(stock.stock_symbol, dispatch))
+          
         })
   }
 }
@@ -51,7 +51,7 @@ const fetchWatchlist = (user_id) => {
       .then(res => res.json())
       .then(watchlist => {
          dispatch(getWatchlist(watchlist))
-            // watchlist.forEach(stock => updateWatchlistChange(stock.stock_symbol, dispatch))
+          watchlist.forEach(stock => updateWatchlistStock(stock.ticker, dispatch))
           })
     }
   }
@@ -70,7 +70,7 @@ const fetchWatchlist = (user_id) => {
       .then(res => res.json())
       .then(holding => {
          dispatch(getHolding(holding))
-            // watchlist.forEach(stock => updateWatchlistChange(stock.stock_symbol, dispatch))
+            holding.forEach(stock => updateHoldingStock(stock.ticker, dispatch))
           })
     }
   }
@@ -96,9 +96,8 @@ const fetchWatchlist = (user_id) => {
     }
   }
 
-  const updateWatchlistStock = (ticker) => {
-    return dispatch => { 
-      return fetch(`https://cloud.iexapis.com/stable/stock/${ticker}/quote/?token=${apiKey}`)
+  const updateWatchlistStock = (ticker, dispatch) => {
+      fetch(`https://cloud.iexapis.com/stable/stock/${ticker}/quote/?token=${apiKey}`)
       .then(res => {
         if (res.ok){
           return res.json()
@@ -111,12 +110,10 @@ const fetchWatchlist = (user_id) => {
         }        
       )
       .catch(error => console.log(error)) 
-    }
   }
 
-  const updateHoldingStock = (ticker) => {
-    return dispatch => { 
-      return fetch(`https://cloud.iexapis.com/stable/stock/${ticker}/quote/?token=${apiKey}`)
+  const updateHoldingStock = (ticker, dispatch) => {
+      fetch(`https://cloud.iexapis.com/stable/stock/${ticker}/quote/?token=${apiKey}`)
       .then(res => {
         if (res.ok){
           return res.json()
@@ -129,7 +126,7 @@ const fetchWatchlist = (user_id) => {
         }        
       )
       .catch(error => console.log(error)) 
-    }
+    
   }
 
   const createBuyTransaction = (transaction, user_id, stock) => {
@@ -181,7 +178,7 @@ const fetchWatchlist = (user_id) => {
       .then(object => {
         dispatch(getUser(object.user))
         dispatch(getHolding(object.holdings))
-  
+        object.holdings.forEach(stock => updateHoldingStock(stock.ticker, dispatch))
       })
   }
 
@@ -235,6 +232,7 @@ const fetchWatchlist = (user_id) => {
       .then(object => {
         dispatch(getUser(object.user))
         dispatch(getHolding(object.holdings))
+        object.holdings.forEach(stock => updateHoldingStock(stock.ticker, dispatch))
       })
   }
 

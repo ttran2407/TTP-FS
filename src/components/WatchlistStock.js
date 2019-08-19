@@ -5,9 +5,7 @@ import { Table } from 'semantic-ui-react'
 
 class WatchlistStock extends Component {
     
-    componentDidMount = () => {
-        this.props.updateWatchlistStock(this.props.stock.ticker)
-    }
+    
 
     render() { 
         return (

@@ -9,7 +9,11 @@ class Transaction extends Component {
         return (
 
             <Table.Row>
-                <Table.Cell>{created_at}</Table.Cell>
+                <Table.Cell>
+                    {  new Date(created_at).toLocaleTimeString() }
+                    {"  "}
+                    {  new Date(created_at).toLocaleDateString() }
+                </Table.Cell>
                 <Table.Cell>{ticker}</Table.Cell>
                 <Table.Cell>{transaction_type}</Table.Cell>
                 <Table.Cell>{stock_price}</Table.Cell>

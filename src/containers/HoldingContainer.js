@@ -11,11 +11,13 @@ class HoldingContainer extends Component {
     }
     
     render() { 
+        
+
         const list = this.props.holding.map(
             stock => <HoldingStock key={stock.id} stock={stock}/>
         )
         return (
-            <div className="holding-table">
+            <div className="holding-table" >
                 <Table singleLine>
                     <Table.Header>
                         <Table.Row>
@@ -25,9 +27,11 @@ class HoldingContainer extends Component {
                             <Table.HeaderCell>Value</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
-                    <Table.Body>
+                    
+                         <Table.Body >
                         {list}
-                    </Table.Body>
+                        </Table.Body>
+                    
                 </Table>
             </div>
           );

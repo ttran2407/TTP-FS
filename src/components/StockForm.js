@@ -3,6 +3,8 @@ import TradingStock from '../components/TradingStock'
 import {connect} from 'react-redux'
 import {fetchSingleStock} from '../actions/stockAction'
 
+import { Form, Button } from 'semantic-ui-react'
+
 class StockForm extends Component {
     
     state = {
@@ -32,19 +34,23 @@ class StockForm extends Component {
 
         return (
 
-            <div>
-                <form className="transaction-form" onSubmit={this.handleSubmit}>
-                    
-                    <label >Ticker</label>
-                    <input type="text" className="ticker" value={this.state.ticker} onChange={this.handleChange}/>
-                    {(this.props.selectedStock && !this.props.displayTickerError) ?  ( this.props.selectedStock.latestPrice) : null } 
-                    <button type="submit" name="tickerFinder" >Check Price</button>
 
-                </form>
+            <div>
+                <Form onSubmit={this.handleSubmit}>
+                
+                    <Form.Field>
+                        <label >Ticker</label>
+                        <input type="text" className="ticker" value={this.state.ticker} onChange={this.handleChange}/>
+                    </Form.Field>
+                    
+                    <Button type="submit" name="tickerFinder" >Check Price</Button>
+                </Form>
+                
 
                 {this.props.displayTickerError ? <div> Invalid ticker, please re-enter </div> : null}
-
-            { (this.props.selectedStock && !this.props.displayTickerError)? <TradingStock /> : null}
+                {(this.props.selectedStock && !this.props.displayTickerError) ?  ( this.props.selectedStock.latestPrice) : null } 
+                    
+                { (this.props.selectedStock && !this.props.displayTickerError)? <TradingStock /> : null}
 
             </div>
             

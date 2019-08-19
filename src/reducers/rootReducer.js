@@ -82,7 +82,7 @@ const rootReducer = (state = initialState, action) => {
 
           case('ADD_TRANSACTION'): {
             let newTransactions = [...state.transactions]
-            newTransactions.unshift(action.payload)
+            newTransactions.push(action.payload)
             let newState = {...state, transactions: newTransactions}
 
             return newState
