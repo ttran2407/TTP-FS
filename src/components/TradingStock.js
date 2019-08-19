@@ -52,7 +52,7 @@ class TradingStock extends Component {
                 
                     <Form.Field>
                     
-                        <label style={{"textAlign":"center", "display": "flex"}} className='toggler__label'>
+                        <label style={{ "display": "flex"}} className='toggler__label'>
 
                             <div style={{"marginRight":"65px"}}>
                                 <Header sub>Holding: </Header> 
@@ -69,7 +69,7 @@ class TradingStock extends Component {
 
                     
 
-                    <div style={{"textAlign":"center", "display": "flex", "marginBottom":"15px"}}>
+                    <div style={{"display": "flex", "marginBottom":"15px"}}>
                     <Header sub style={{"marginTop":"10px"}} >Quantity</Header>
                     <input style={{"marginLeft":"25px"}} type="text" className="transaction-quantity" value={this.state.quantity} onChange={this.handleChangeQuantity}/> 
                     </div>

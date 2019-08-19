@@ -33,7 +33,7 @@ class SignUpForm extends React.Component {
   handleSubmit = (e) => {
 
     this.resetError()
-    if (this.state.email.length < 8 || this.state.email.length > 20 || !this.state.email.includes("@") ){
+    if (this.state.email.length < 8 || this.state.email.length > 40 || !this.state.email.includes("@") ){
       this.setState({userNameError: true, error: true, errorContent: "Please enter a valid email"})
     } else if (this.state.name === ""){
       this.setState({nameError: true, error: true, errorContent: " Name cannot be empty"})

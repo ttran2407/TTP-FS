@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import WatchlistContainer from "./WatchlistContainer"
 import HoldingContainer from "./HoldingContainer"
 import TransactionContainer from "./TransactionContainer"
-import { Grid} from 'semantic-ui-react'
+import { Grid, Header} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
 import StockForm from '../components/StockForm'
@@ -18,21 +18,28 @@ class UserContainer extends Component {
 
                 <Top />
 
-                <Grid style={{"height": "350px"}} columns={3} padded='vertically'>
+                <Grid style={{"textAlign": "center", "height": "350px"}} columns={3} padded='vertically'>
                     <Grid.Column>
+                        <Header style={{"marginBottom": "10px"}} sub>Watchlist</Header>
                         <WatchlistContainer/>
                     </Grid.Column>
 
                     <Grid.Column>
+                        <Header style={{"marginBottom": "10px"}} sub>Trading</Header>
                         <StockForm/> 
                     </Grid.Column>
 
                     <Grid.Column>
+                        <Header style={{"marginBottom": "10px"}} sub>Holding</Header>
                         <HoldingContainer/> 
                     </Grid.Column>            
                 </Grid>
 
-                <TransactionContainer/>  
+                <div >
+                    <Header style={{"textAlign": "center", "marginBottom": "10px"}} sub>Transactions</Header> 
+                    <TransactionContainer/>
+                </div>
+                  
 
             </div>
           );

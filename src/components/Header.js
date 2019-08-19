@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Header, Segment, List} from 'semantic-ui-react'
+import { List} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
 class Top extends Component {
@@ -17,7 +17,7 @@ class Top extends Component {
         return ( 
             
 
-            <List horizontal relaxed='very'>
+            <List style={{"marginLeft": "350px"}} horizontal relaxed='very'>
                 <List.Item>
                     <List.Content>
                         Hello
@@ -27,18 +27,18 @@ class Top extends Component {
                 <List.Item>
                     <List.Content>
                         Value:
-                        <List.Header > ${totalValue}</List.Header>
+                        <List.Header > ${totalValue.toFixed(2)}</List.Header>
                     </List.Content>
                 </List.Item>
                 <List.Item>
                     <List.Content>
                         Buying Power:
-                        <List.Header > ${this.props.user.cash}</List.Header>
+                        <List.Header > ${parseFloat(this.props.user.cash).toFixed(2)}</List.Header>
                     </List.Content>
                 </List.Item>
                 <List.Item >
                     <List.Content >
-                        <List.Header onClick={this.handleClick} as='a' textAlign="right">Log Out</List.Header>
+                        <List.Header style={{"marginLeft": "150px"}} onClick={this.handleClick} as='a' >Log Out</List.Header>
                     </List.Content>
                 </List.Item>
             </List>

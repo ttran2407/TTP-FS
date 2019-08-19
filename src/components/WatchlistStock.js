@@ -8,10 +8,17 @@ class WatchlistStock extends Component {
     
 
     render() { 
+        let {ticker, change} = this.props.stock
+        let color
+
+        if(change < 0){
+            color = "red"
+        } else if ( change === 0 ){color = "grey"} else {color = "green"}
+
         return (
             <Table.Row>
-                <Table.Cell>{this.props.stock.ticker}</Table.Cell>
-                <Table.Cell>{(this.props.stock.change * 100).toFixed(2)}%</Table.Cell>
+                <Table.Cell style ={{"color": color}} >{ticker}</Table.Cell>
+                <Table.Cell>{(change * 100).toFixed(2)}%</Table.Cell>
             </Table.Row>
             
           );

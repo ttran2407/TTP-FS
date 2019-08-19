@@ -39,13 +39,13 @@ class StockForm extends Component {
                 <Form onSubmit={this.handleSubmit}>
                 
                     <Form.Field>
-                        <div style={{"textAlign":"center", "display": "flex"}}> 
+                        <div style={{ "display": "flex"}}> 
                             <Header style={{"marginTop":"10px"}} sub>Ticker</Header>
                             <input style={{"marginLeft":"45px"}}  type="text" className="ticker" value={this.state.ticker} onChange={this.handleChange}/>
                         </div>
                      </Form.Field>
 
-                     <div style={{"textAlign":"center", "display": "flex"}}>
+                     <div style={{ "display": "flex"}}>
                             <Button type="submit" name="tickerFinder" >Check Price</Button>
  
                             {(this.props.selectedStock && !this.props.displayTickerError) ?
