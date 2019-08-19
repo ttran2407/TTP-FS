@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {updateHoldingStock} from '../actions/stockAction'
+import { Table } from 'semantic-ui-react'
 
 class HoldingStock extends Component {
 
@@ -10,12 +11,14 @@ class HoldingStock extends Component {
     
     render() { 
         return (
-            <div>
-                Ticker: {this.props.stock.ticker}
-                Quantity: {this.props.stock.quantity}
-                Price: {this.props.stock.price}
-                Value: {this.props.stock.quantity * this.props.stock.price}
-            </div>
+
+                <Table.Row>
+                    <Table.Cell>{this.props.stock.ticker}</Table.Cell>
+                    <Table.Cell>{this.props.stock.quantity}</Table.Cell>
+                    <Table.Cell>{this.props.stock.price}</Table.Cell>
+                    <Table.Cell>{this.props.stock.quantity * this.props.stock.price}</Table.Cell>
+                </Table.Row>
+
           );
     }
 }
