@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {fetchTransactions} from '../actions/stockAction'
 import Transaction from '../components/Transaction'
+import { Table } from 'semantic-ui-react'
+
 
 class TransactionContainer extends Component {
 
@@ -16,9 +18,20 @@ class TransactionContainer extends Component {
         )
         
         return ( 
-            <div>
-                {list}
-            </div>
+            <Table singleLine>
+                <Table.Header>
+                    <Table.Row>
+                        <Table.HeaderCell>Date</Table.HeaderCell>
+                        <Table.HeaderCell>Ticker</Table.HeaderCell>
+                        <Table.HeaderCell>Type</Table.HeaderCell>
+                        <Table.HeaderCell>Price</Table.HeaderCell>
+                        <Table.HeaderCell>Quantity</Table.HeaderCell>
+                    </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                    {list}
+                </Table.Body>
+            </Table>
          );
     }
 }
