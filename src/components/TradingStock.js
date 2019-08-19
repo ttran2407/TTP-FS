@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {createBuyTransaction, createSellTransaction} from '../actions/stockAction'
-import {Button, Form, Header } from 'semantic-ui-react'
+import {Button, Form, Header, Input } from 'semantic-ui-react'
 
 class TradingStock extends Component {
 
@@ -71,7 +71,17 @@ class TradingStock extends Component {
 
                     <div style={{"display": "flex", "marginBottom":"15px"}}>
                     <Header sub style={{"marginTop":"10px"}} >Quantity</Header>
-                    <input style={{"marginLeft":"25px"}} type="text" className="transaction-quantity" value={this.state.quantity} onChange={this.handleChangeQuantity}/> 
+                    <Form.Field
+                        style={{"marginLeft":"25px"}}
+                        name="quantity"
+                        onChange={this.handleChangeQuantity}
+                        type='number'
+                        min={1}
+                        id='form-input-control-quantity'
+                        control={Input}
+                      
+                        value={this.state.quantity}
+                    />
                     </div>
                                  
                     <Button style={{"width": "115px"}} type="submit" >Submit</Button>
