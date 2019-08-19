@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {fetchWatchlist} from '../actions/stockAction'
 import WatchlistStock from '../components/WatchlistStock'
+import { Table } from 'semantic-ui-react'
 
 class WatchlistContainer extends Component {
 
@@ -17,7 +18,17 @@ class WatchlistContainer extends Component {
         )
         return (
             <div className="watchlist-table">
-               {list} 
+                <Table singleLine>
+                    <Table.Header>
+                        <Table.Row>                
+                            <Table.HeaderCell>Ticker</Table.HeaderCell>
+                            <Table.HeaderCell>Change</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        {list}
+                    </Table.Body>
+                </Table>
             </div>
           );
     }
