@@ -30,14 +30,14 @@ class TradingStock extends Component {
             if (this.state.quantity > this.props.selectedStock.quantity){ //dont have enough stock
                 this.setState({notEnoughStock: true})
             } else {
-                this.props.createSellTransaction(this.state, 1, this.props.selectedStock) //create sell transaction
+                this.props.createSellTransaction(this.state, this.props.user.id, this.props.selectedStock) //create sell transaction
             }
         } else { //buy stock
-            // if (this.state.quantity * this.props.selectedStock.latestPrice > user_money){ //dont have enough money
-            //     this.setState({notEnoughMoney: true})
-            // } else {
-                this.props.createBuyTransaction(this.state, 1, this.props.selectedStock) //create buy transaction
-            // }
+            if (this.state.quantity * this.props.selectedStock.latestPrice > parseFloat(this.props.user.cash)){ //dont have enough money
+                this.setState({notEnoughMoney: true})
+            } else {
+                this.props.createBuyTransaction(this.state, this.props.user.id, this.props.selectedStock) //create buy transaction
+            }
         }
     }
 

@@ -152,6 +152,7 @@ const fetchWatchlist = (user_id) => {
       })
       .then(res => res.json())
       .then(array => {
+        console.log(array)
         createHoldingStock(array[0], dispatch)
         dispatch(addTransaction(array[0]))
       })
