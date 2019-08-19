@@ -3,7 +3,7 @@ import TradingStock from '../components/TradingStock'
 import {connect} from 'react-redux'
 import {fetchSingleStock} from '../actions/stockAction'
 
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Header } from 'semantic-ui-react'
 
 class StockForm extends Component {
     
@@ -39,16 +39,30 @@ class StockForm extends Component {
                 <Form onSubmit={this.handleSubmit}>
                 
                     <Form.Field>
-                        <label >Ticker</label>
-                        <input type="text" className="ticker" value={this.state.ticker} onChange={this.handleChange}/>
-                    </Form.Field>
+                        <div style={{"textAlign":"center", "display": "flex"}}> 
+                            <Header style={{"marginTop":"10px"}} sub>Ticker</Header>
+                            <input style={{"marginLeft":"45px"}}  type="text" className="ticker" value={this.state.ticker} onChange={this.handleChange}/>
+                        </div>
+                     </Form.Field>
+
+                     <div style={{"textAlign":"center", "display": "flex"}}>
+                            <Button type="submit" name="tickerFinder" >Check Price</Button>
+ 
+                            {(this.props.selectedStock && !this.props.displayTickerError) ?
+                                 (<div style={{"marginLeft":"65px"}}>
+                                     <Header sub>PRICE</Header>
+                                     {this.props.selectedStock.latestPrice}
+                                 </div>
+                                  
+                                 ) :
+                                   null }          
+                     </div>
                     
-                    <Button type="submit" name="tickerFinder" >Check Price</Button>
-                </Form>
+                    </Form>
                 
 
                 {this.props.displayTickerError ? <div> Invalid ticker, please re-enter </div> : null}
-                {(this.props.selectedStock && !this.props.displayTickerError) ?  ( this.props.selectedStock.latestPrice) : null } 
+                 
                     
                 { (this.props.selectedStock && !this.props.displayTickerError)? <TradingStock /> : null}
 

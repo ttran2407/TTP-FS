@@ -18,7 +18,7 @@ class UserContainer extends Component {
 
                 <Top />
 
-                <Grid style={{"height": "250px"}} columns={3} padded='vertically'>
+                <Grid style={{"height": "350px"}} columns={3} padded='vertically'>
                     <Grid.Column>
                         <WatchlistContainer/>
                     </Grid.Column>

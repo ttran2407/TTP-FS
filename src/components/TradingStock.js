@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {createBuyTransaction, createSellTransaction} from '../actions/stockAction'
+import {Button, Form, Header } from 'semantic-ui-react'
 
 class TradingStock extends Component {
 
@@ -46,24 +47,42 @@ class TradingStock extends Component {
         let stock = this.props.holding.find(stock => stock.ticker === this.props.selectedStock.symbol)
 
         return (
-            <div>
-                Let get a trade
-                <form onSubmit = {this.handleSubmit}>
+            <div style={{"marginTop":"15px"}}>
+                <Form onSubmit={this.handleSubmit}>
+                
+                    <Form.Field>
+                    
+                        <label style={{"textAlign":"center", "display": "flex"}} className='toggler__label'>
 
-                <label className='toggler__label'>
-                    <input type="checkbox" hidden onChange={this.handleChangeType}/>
-                    <span>Buy</span>
-                    <div className='toggler'></div>
-                    <span>Sell</span>
-                </label>
+                            <div style={{"marginRight":"65px"}}>
+                                <Header sub>Holding: </Header> 
+                                {stock ? stock.quantity : 0} 
+                            </div>
 
-                <label>Currently holding</label> 
-                <div>{stock ? stock.quantity : 0}</div>               
+                            <input type="checkbox" hidden onChange={this.handleChangeType}/>
+                            <Header  sub>BUY</Header>
+                            <div style={{"marginLeft":"25px", "marginRight":"25px"}} className='toggler'></div>
+                            <Header  sub>SELL</Header>
+                        </label>
 
-                <label >Quantity</label>
-                <input type="text" className="transaction-quantity" value={this.state.quantity} onChange={this.handleChangeQuantity}/>
-                <button type="submit" >Submit</button>
-                </form>
+                    </Form.Field>
+
+                    
+
+                    <div style={{"textAlign":"center", "display": "flex", "marginBottom":"15px"}}>
+                    <Header sub style={{"marginTop":"10px"}} >Quantity</Header>
+                    <input style={{"marginLeft":"25px"}} type="text" className="transaction-quantity" value={this.state.quantity} onChange={this.handleChangeQuantity}/> 
+                    </div>
+                                 
+                    <Button style={{"width": "115px"}} type="submit" >Submit</Button>
+                    
+                </Form>
+           
+
+                
+
+                
+               
             </div>
           );
     }
